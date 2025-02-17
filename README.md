@@ -1,8 +1,4 @@
-<div align="center">
-  <img alt="Portfolio" src="https://github.com/dillionverma/portfolio/assets/16860528/57ffca81-3f0a-4425-b31d-094f61725455" width="90%">
-</div>
-
-# 🚀 My Portfolio [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdillionverma%2Fportfolio)
+# 🚀 My Portfolio
 
 A sleek, modern, and fully responsive portfolio website showcasing my skills, experience, and projects. Built with **Next.js**, **ShadCN/UI**, **Magic UI**, and deployed on **Vercel**.
 
@@ -21,7 +17,7 @@ A sleek, modern, and fully responsive portfolio website showcasing my skills, ex
 1. **Clone this repository** to your local machine:
 
    ```bash
-   git clone https://github.com/dillionverma/portfolio
+   git clone https://github.com/piyushzala158/portfolio-latest.git
    ```
 
 2. **Move to the cloned directory**
