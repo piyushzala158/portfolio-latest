@@ -8,10 +8,10 @@ export const DATA = {
   location: "Gujarat, india",
   locationLink: "https://www.google.com/maps/place/sanfrancisco",
   description:
-    "A passionate Front-End Developer with 2 years of industry experience.",
+    "A passionate Front-End Developer with 2+ years of industry experience.",
   summary:
     "Enthusiastic Front-End Developer with 2+ years of experience building user-friendly and responsive web applications. Adept at utilizing a diverse tech stack including Next.js, React.js, MUI, Firebase, WebSockets, Auth0, Tailwind CSS, SCSS, Prisma, and React Native. Skilled in state management libraries such as Redux and Recoil, form handling with Formik, and animation libraries like Framer Motion. Strong communicator with proven ability to collaborate effectively with cross-functional teams and engage with clients to gather requirements, provide updates, and deliver high-quality solutions. Passionate about creating intuitive and visually appealing UIs while staying up-to-date with the latest front-end trends.",
-  // avatarUrl: "/me.png",
+  avatarUrl: "/piyush.jpeg",
   skills: ["React", "Next.js", "Typescript", "Material UI"],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -90,64 +90,31 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Chat Collect",
-      href: "https://chatcollect.com",
-      dates: "Jan 2024 - Feb 2024",
+      title: "Meetting Summarizer",
+      href: "https://yourmeetingbuddy.vercel.app/login",
+      dates: "Jan 2025 - Feb 2025",
       active: true,
       description:
-        "With the release of the [OpenAI GPT Store](https://openai.com/blog/introducing-the-gpt-store), I decided to build a SaaS which allows users to collect email addresses from their GPT users. This is a great way to build an audience and monetize your GPT API usage.",
+        "I built this web app using Next.js (App Router), NextAuth, Supabase, ShadCN, Tailwind CSS, and a gamini API. Users can sign up with Google, record meetings without joining as bots, and receive AI-generated summaries. They can also access a history of all their meeting summaries for easy reference.",
       technologies: [
         "Next.js",
         "Typescript",
         "PostgreSQL",
-        "Prisma",
+        "NextAuth",
         "TailwindCSS",
-        "Stripe",
+        "Supabase",
         "Shadcn UI",
-        "Magic UI",
+        "gamini",
       ],
       links: [
         {
           type: "Website",
-          href: "https://chatcollect.com",
+          href: "https://yourmeetingbuddy.vercel.app/login",
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "",
-      video:
-        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/chat-collect.mp4",
-    },
-    {
-      title: "Magic UI",
-      href: "https://magicui.design",
-      dates: "June 2023 - Present",
-      active: true,
-      description:
-        "Designed, developed and sold animated UI components for developers.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "PostgreSQL",
-        "Prisma",
-        "TailwindCSS",
-        "Stripe",
-        "Shadcn UI",
-        "Magic UI",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://magicui.design",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/magicuidesign/magicui",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "https://cdn.magicui.design/bento-grid.mp4",
+      image: "/meetbuddy.png",
+      video: "",
     },
   ],
   hackathons: [],
