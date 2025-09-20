@@ -139,7 +139,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
                   >
-                    {projects[currentIndex].links.map((link, index) => (
+                    {projects[currentIndex]?.links?.map((link, index) => (
                       <Link
                         key={index}
                         href={link.href}
