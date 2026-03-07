@@ -26,7 +26,7 @@ export function AnimatedTimeline({ items }: AnimatedTimelineProps) {
   return (
     <div className="relative">
       {/* Timeline line */}
-      <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500 via-blue-500 to-green-500 opacity-30" />
+      <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border" />
 
       <div className="space-y-12">
         {items.map((item, index) => (
@@ -46,7 +46,7 @@ export function AnimatedTimeline({ items }: AnimatedTimelineProps) {
                 type: "spring",
                 stiffness: 200,
               }}
-              className="absolute left-6 top-6 w-4 h-4 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 border-4 border-background shadow-lg"
+              className="absolute left-[26px] top-6 w-3 h-3 rounded-full bg-primary ring-4 ring-background"
             />
 
             {/* Content card */}

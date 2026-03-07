@@ -45,7 +45,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
   return (
     <div className="relative w-full max-w-4xl mx-auto">
       {/* Main carousel container */}
-      <div className="relative h-[500px] overflow-hidden rounded-2xl glass-card">
+      <div className="relative h-[550px] md:h-[450px] overflow-hidden rounded-2xl glass-card">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -68,10 +68,11 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
                     transition={{ duration: 0.5 }}
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-500/20 to-blue-500/20">
-                    <span className="text-4xl font-bold text-muted-foreground">
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-purple-500/10 to-blue-500/10 border-2 border-dashed border-primary/20">
+                    <span className="text-6xl font-black gradient-text opacity-50 mb-4">
                       {projects[currentIndex].title.charAt(0)}
                     </span>
+                    <span className="text-sm text-muted-foreground font-medium">Screenshot coming soon</span>
                   </div>
                 )}
 
@@ -81,8 +82,9 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
             </div>
 
             {/* Project Info */}
-            <div className="flex-1 space-y-6">
-              <div className="space-y-4">
+            <div className="flex-1 flex flex-col h-full overflow-hidden">
+              {/* Scrollable container for robust content */}
+              <div className="flex-1 overflow-y-auto pr-2 pb-4 space-y-4 custom-scrollbar">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}

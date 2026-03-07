@@ -15,6 +15,7 @@ import {
   Moon,
   Menu,
   X,
+  BookOpen,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { DATA } from "@/data/resume";
@@ -23,6 +24,7 @@ const navigationItems = [
   { icon: Home, label: "Home", href: "#hero" },
   { icon: User, label: "About", href: "#about" },
   { icon: Briefcase, label: "Experience", href: "#work" },
+  { icon: BookOpen, label: "Education", href: "#education" },
   { icon: Code, label: "Projects", href: "#projects" },
   { icon: Mail, label: "Contact", href: "#contact" },
 ];

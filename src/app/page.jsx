@@ -51,8 +51,7 @@ export default function Page() {
                   <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
                     <span className="gradient-text">
                       {DATA.name.split(" ")[0]}
-                    </span>
-                    <br />
+                    </span>{" "}
                     <span className="text-foreground">
                       {DATA.name.split(" ")[1]}
                     </span>
@@ -165,7 +164,7 @@ export default function Page() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-20 px-6">
+        <section id="about" className="py-32 px-6">
           <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -191,7 +190,7 @@ export default function Page() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="py-20 px-6">
+        <section id="skills" className="py-32 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -220,7 +219,7 @@ export default function Page() {
         </section>
 
         {/* Work Experience Section */}
-        <section id="work" className="py-20 px-6">
+        <section id="work" className="py-32 px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -243,7 +242,7 @@ export default function Page() {
         </section>
 
         {/* Education Section */}
-        <section id="education" className="py-20 px-6">
+        <section id="education" className="py-32 px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -265,7 +264,7 @@ export default function Page() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-20 px-6">
+        <section id="projects" className="py-32 px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -294,7 +293,7 @@ export default function Page() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 px-6">
+        <section id="contact" className="py-32 px-6 bg-background/50 backdrop-blur-sm">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -346,8 +345,7 @@ export default function Page() {
         <footer className="py-12 px-6 border-t border-border/50">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-muted-foreground">
-              © 2024 {DATA.name}. Built with Next.js, Tailwind CSS, and Framer
-              Motion.
+              © 2026 {DATA.name}
             </p>
           </div>
         </footer>
