@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Piyush Zala Portfolio
+
+A modern, animated portfolio site for showcasing my work as a Frontend Software Engineer. It is designed to feel personal and polished while keeping the content easy to scan: experience, skills, projects, education, and a direct path to contact.
+
+## What’s Inside
+
+- A strong hero section with a short intro and social links
+- About, Skills, Experience, Education, Projects, and Contact sections
+- Smooth scrolling navigation with section awareness
+- Glassmorphism-inspired UI, aurora-style background, and subtle motion
+- Theme switching with a persistent light/dark experience
+- A responsive layout that works well on desktop and mobile
+
+## Tech Stack
+
+- Next.js 16 App Router
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion
+- next-themes
+- lucide-react
 
 ## Getting Started
 
-First, run the development server:
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+### Start the production server
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Lint the codebase
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run lint
+```
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+src/
+  app/          # App Router entry points, layout, global styles
+  components/   # Layout, sections, and reusable UI pieces
+  data/         # Portfolio content and navigation data
+  hooks/        # Custom hooks such as scroll spying
+  lib/          # Utility helpers
+  types/        # Shared TypeScript types
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The homepage is composed in [`src/app/page.tsx`](src/app/page.tsx), which stitches together the portfolio sections in a single landing page experience.
+
+## Customization
+
+Most of the public-facing content lives in [`src/data/portfolio.ts`](src/data/portfolio.ts). Update that file if you want to:
+
+- change the biography or tagline
+- swap in new skills or project highlights
+- update social links, contact details, or location
+- add or remove resume sections
+
+## Deployment
+
+This project is ready to deploy on Vercel or any platform that supports Next.js. Set the usual production environment variables if you add any, then run `npm run build` to verify the app before shipping.
+
+## A Note on the Design
+
+The UI leans into depth, gradients, glass panels, and motion instead of a plain template look. The goal is to make the portfolio feel like a real product, not just a resume page.
