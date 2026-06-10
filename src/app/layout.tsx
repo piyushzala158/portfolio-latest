@@ -1,73 +1,62 @@
-import { ThemeProvider } from "@/components/theme-provider";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { DATA } from "@/data/resume";
-import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { AuroraBackground } from "@/components/ui/aurora-background";
+import { Navigation } from "@/components/layout/navigation";
 
-const fontSans = FontSans({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-inter",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(DATA.url),
-  title: {
-    default: DATA.name,
-    template: `%s | ${DATA.name}`,
-  },
-  description: DATA.description,
+  title: "Piyush Zala — Frontend Software Engineer",
+  description:
+    "Portfolio of Piyush Zala — Frontend Software Engineer specializing in React, Next.js, and TypeScript. 3+ years of experience building modern web applications.",
+  keywords: ["Piyush Zala", "Frontend Engineer", "React", "Next.js", "TypeScript", "Portfolio"],
+  authors: [{ name: "Piyush Zala" }],
   openGraph: {
-    title: `${DATA.name}`,
-    description: DATA.description,
-    url: DATA.url,
-    siteName: `${DATA.name}`,
+    title: "Piyush Zala — Frontend Software Engineer",
+    description: "Frontend Software Engineer specializing in React, Next.js, and TypeScript.",
+    url: "https://portfolio-latest-taupe.vercel.app",
+    siteName: "Piyush Zala Portfolio",
     locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Piyush Zala — Frontend Software Engineer",
+    description: "Frontend Software Engineer specializing in React, Next.js, and TypeScript.",
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  twitter: {
-    title: `${DATA.name}`,
-    description: DATA.description,
-    card: "summary_large_image",
-  },
-  verification: {
-    google: "",
-    yandex: "",
   },
 };
 
-interface RootLayoutProps {
+export default function RootLayout({
+  children,
+}: Readonly<{
   children: React.ReactNode;
-}
-
-export default function RootLayout({ children }: RootLayoutProps) {
+}>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-full overflow-x-hidden",
-          fontSans.variable
-        )}
+        className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
+        <ThemeProvider>
+          <AuroraBackground />
+          <Navigation />
+          <main className="relative z-10">
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>
