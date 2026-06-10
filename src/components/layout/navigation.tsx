@@ -2,8 +2,10 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Gamepad2, Menu, X } from "lucide-react";
 import { DATA } from "@/data/portfolio";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -11,6 +13,7 @@ import { cn } from "@/lib/utils";
 
 export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   const sectionIds = useMemo(
     () => DATA.navbar.map((item) => item.href.replace("#", "")),
@@ -18,6 +21,10 @@ export function Navigation() {
   );
 
   const activeSection = useScrollSpy(sectionIds);
+
+  if (pathname === "/game") {
+    return null;
+  }
 
   return (
     <>
@@ -83,6 +90,17 @@ export function Navigation() {
         {/* Divider */}
         <div className="w-6 h-px bg-border-subtle my-1" />
 
+        <Link
+          href="/game"
+          className="relative w-10 h-10 rounded-xl flex items-center justify-center text-text-muted hover:text-text-primary transition-colors group"
+          aria-label="Open Game Mode"
+        >
+          <Gamepad2 className="h-5 w-5" aria-hidden="true" />
+          <span className="absolute left-full ml-3 px-2.5 py-1 rounded-lg bg-bg-secondary text-text-primary text-xs font-medium whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 shadow-lg border border-border-subtle">
+            Game Mode
+          </span>
+        </Link>
+
         {/* Theme toggle */}
         <ThemeToggle className="w-10 h-10" />
       </nav>
@@ -120,6 +138,15 @@ export function Navigation() {
               );
             })}
           </div>
+
+          {/* Hamburger */}
+          <Link
+            href="/game"
+            className="w-10 h-10 flex items-center justify-center rounded-full text-text-secondary hover:text-text-primary transition-colors"
+            aria-label="Open Game Mode"
+          >
+            <Gamepad2 className="w-5 h-5" aria-hidden="true" />
+          </Link>
 
           {/* Hamburger */}
           <button

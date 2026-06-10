@@ -1,0 +1,292 @@
+.card {
+  position: absolute;
+  z-index: 9;
+  max-height: 330px;
+  overflow: hidden;
+  border: 1px solid var(--game-border);
+  border-radius: 8px;
+  background: var(--game-panel);
+  box-shadow: 0 18px 70px rgba(0, 0, 0, 0.34);
+  padding: 20px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  outline: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease,
+    max-height 180ms ease;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  border: 1px solid rgba(34, 211, 238, 0.34);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.card.active,
+.card:focus-visible {
+  z-index: 14;
+  max-height: 470px;
+  overflow: auto;
+  border-color: var(--game-border-strong);
+  box-shadow:
+    0 24px 88px rgba(0, 0, 0, 0.4),
+    0 0 42px rgba(34, 211, 238, 0.11);
+  transform: translateY(-8px);
+}
+
+.card.active::before,
+.card:focus-visible::before {
+  opacity: 1;
+}
+
+.project:not(.active) {
+  width: 286px !important;
+  max-height: 154px;
+}
+
+.skills {
+  max-height: 390px;
+}
+
+.skills.active {
+  max-height: 520px;
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  color: var(--game-text);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 1.55rem;
+  line-height: 1.1;
+}
+
+.card h3,
+.card p {
+  margin: 0;
+}
+
+.card p {
+  color: var(--game-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.kicker {
+  margin-bottom: 8px !important;
+  color: var(--game-cyan) !important;
+  font-size: 0.7rem !important;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.chips span {
+  border: 1px solid var(--game-border);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 6px 10px;
+  color: rgba(241, 245, 249, 0.88);
+  font-size: 0.74rem;
+  line-height: 1;
+}
+
+.prompt {
+  margin-top: 12px !important;
+  color: rgba(125, 211, 252, 0.72) !important;
+  font-size: 0.74rem !important;
+  font-weight: 800;
+}
+
+.skillGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.skillCard {
+  min-height: 126px;
+  border: 1px solid var(--game-border);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.48);
+  padding: 13px;
+}
+
+.skillCard svg {
+  color: var(--game-cyan);
+}
+
+.skillCard h3 {
+  margin-top: 8px;
+  color: var(--game-text);
+  font-size: 0.88rem;
+}
+
+.skillCard p {
+  margin-top: 9px;
+  font-size: 0.72rem;
+  line-height: 1.42;
+}
+
+.meter {
+  height: 7px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(51, 65, 85, 0.7);
+}
+
+.meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--game-cyan), var(--game-green));
+}
+
+.links,
+.contactGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.links a,
+.contactGrid a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--game-border);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.72);
+  padding: 9px 13px;
+  color: var(--game-text);
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.links a:hover,
+.contactGrid a:hover {
+  border-color: var(--game-border-strong);
+  background: rgba(34, 211, 238, 0.12);
+}
+
+.timeline {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.timeline article {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  border-left: 2px solid rgba(251, 191, 36, 0.42);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.44);
+  padding: 12px;
+}
+
+.timeline svg {
+  margin-top: 2px;
+  color: var(--game-amber);
+}
+
+.timeline h3 {
+  color: var(--game-text);
+  font-size: 0.92rem;
+}
+
+.timeline p {
+  margin-top: 3px;
+  font-size: 0.76rem;
+}
+
+.trophy {
+  position: absolute;
+  z-index: 10;
+  display: grid;
+  width: 150px;
+  justify-items: center;
+  gap: 8px;
+  border: 1px solid rgba(251, 191, 36, 0.26);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.68);
+  padding: 14px;
+  color: #fde68a;
+  text-align: center;
+  box-shadow: 0 16px 55px rgba(0, 0, 0, 0.34);
+  animation: trophy-float 3.8s ease-in-out infinite;
+}
+
+.trophy span {
+  color: var(--game-text);
+  font-size: 0.76rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.trophy.collected {
+  border-color: rgba(52, 211, 153, 0.62);
+  color: var(--game-green);
+  box-shadow:
+    0 16px 55px rgba(0, 0, 0, 0.34),
+    0 0 36px rgba(52, 211, 153, 0.18);
+}
+
+@keyframes trophy-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 900px) {
+  .card {
+    padding: 18px;
+  }
+
+  .skillGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .card {
+    max-width: calc(100vw - 28px);
+  }
+
+  .card h2 {
+    font-size: 1.28rem;
+  }
+
+  .card p {
+    font-size: 0.82rem;
+  }
+
+  .skillGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .trophy {
+    animation: none !important;
+    transition: none !important;
+  }
+}
