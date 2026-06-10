@@ -1,0 +1,132 @@
+.hud {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 16px;
+  z-index: 90;
+  display: grid;
+  grid-template-columns: minmax(190px, 290px) 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  max-width: 1120px;
+  margin-inline: auto;
+  border: 1px solid var(--game-border);
+  border-radius: 8px;
+  background: rgba(3, 7, 18, 0.76);
+  padding: 10px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.locationIcon {
+  color: var(--game-cyan);
+}
+
+.eyebrow,
+.title {
+  margin: 0;
+  line-height: 1.1;
+}
+
+.eyebrow {
+  color: var(--game-muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  color: var(--game-text);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.progressTrack {
+  height: 8px;
+  min-width: 120px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(51, 65, 85, 0.62);
+}
+
+.progressTrack span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--game-cyan), var(--game-green));
+  transition: width 180ms ease;
+}
+
+.meta {
+  display: flex;
+  gap: 10px;
+  color: var(--game-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.actions button,
+.actions a {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--game-border);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.75);
+  color: var(--game-text);
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.actions button:hover,
+.actions a:hover {
+  border-color: var(--game-border-strong);
+  background: rgba(34, 211, 238, 0.12);
+}
+
+@media (max-width: 900px) {
+  .hud {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+
+  .progressTrack,
+  .meta {
+    grid-column: 1 / -1;
+  }
+
+  .meta {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .hud {
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    gap: 9px;
+    padding: 9px;
+  }
+
+  .meta {
+    font-size: 0.72rem;
+  }
+}

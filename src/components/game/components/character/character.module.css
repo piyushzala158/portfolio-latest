@@ -1,0 +1,235 @@
+.character {
+  position: absolute;
+  z-index: 16;
+  transform-origin: center bottom;
+  will-change: left, top, transform;
+}
+
+.shadow {
+  position: absolute;
+  left: 3px;
+  bottom: -8px;
+  width: 42px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.28);
+  filter: blur(2px);
+}
+
+.head,
+.body,
+.arm,
+.leg,
+.backpack,
+.scarf {
+  position: absolute;
+  display: block;
+}
+
+.head {
+  left: 8px;
+  top: 0;
+  width: 31px;
+  height: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px 15px 13px 13px;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.9), transparent 18%),
+    linear-gradient(145deg, #e0f2fe, #7dd3fc 52%, #38bdf8);
+  box-shadow:
+    0 0 24px rgba(34, 211, 238, 0.26),
+    inset 0 -5px 9px rgba(2, 6, 23, 0.18);
+}
+
+.face {
+  position: absolute;
+  left: 7px;
+  top: 10px;
+  width: 18px;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.82);
+}
+
+.eye {
+  position: absolute;
+  right: 8px;
+  top: 14px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  box-shadow: -7px 0 0 #e0f2fe;
+}
+
+.smile {
+  position: absolute;
+  left: 13px;
+  top: 20px;
+  width: 8px;
+  height: 4px;
+  border-bottom: 2px solid rgba(224, 242, 254, 0.9);
+  border-radius: 0 0 999px 999px;
+}
+
+.body {
+  left: 9px;
+  top: 27px;
+  width: 29px;
+  height: 29px;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-radius: 11px 11px 9px 9px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.2), transparent 34%),
+    linear-gradient(160deg, #0f766e, #075985 58%, #082f49);
+  box-shadow: inset 0 -7px 0 rgba(2, 6, 23, 0.22);
+}
+
+.body::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 9px;
+  width: 11px;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(34, 211, 238, 0.42);
+}
+
+.backpack {
+  left: 3px;
+  top: 31px;
+  width: 13px;
+  height: 24px;
+  border-radius: 8px 4px 7px 7px;
+  background: linear-gradient(180deg, #1e293b, #020617);
+  box-shadow: inset 0 0 0 1px rgba(125, 211, 252, 0.16);
+}
+
+.scarf {
+  left: 26px;
+  top: 28px;
+  width: 24px;
+  height: 8px;
+  border-radius: 999px 999px 999px 3px;
+  background: linear-gradient(90deg, #22d3ee, #34d399);
+  transform-origin: left center;
+  animation: scarf-drift 1.3s ease-in-out infinite;
+}
+
+.arm {
+  top: 32px;
+  width: 9px;
+  height: 22px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #7dd3fc, #0e7490);
+  transform-origin: top center;
+}
+
+.leftArm {
+  left: 3px;
+}
+
+.rightArm {
+  right: 3px;
+}
+
+.leg {
+  top: 53px;
+  width: 10px;
+  height: 17px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #164e63, #020617);
+  transform-origin: top center;
+}
+
+.leftLeg {
+  left: 12px;
+}
+
+.rightLeg {
+  right: 12px;
+}
+
+.idle .head {
+  animation: idle-bob 1.6s ease-in-out infinite;
+}
+
+.walk .leftArm,
+.walk .rightLeg {
+  animation: walk-a 0.42s ease-in-out infinite;
+}
+
+.walk .rightArm,
+.walk .leftLeg {
+  animation: walk-b 0.42s ease-in-out infinite;
+}
+
+.run .leftArm,
+.run .rightLeg {
+  animation: run-a 0.28s ease-in-out infinite;
+}
+
+.run .rightArm,
+.run .leftLeg {
+  animation: run-b 0.28s ease-in-out infinite;
+}
+
+.jump .arm {
+  transform: rotate(-28deg);
+}
+
+.fall .arm {
+  transform: rotate(24deg);
+}
+
+.fall .body {
+  transform: scaleY(1.05);
+}
+
+.land .body {
+  animation: land-squash 0.14s ease-out;
+}
+
+@keyframes idle-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes walk-a {
+  0%, 100% { transform: rotate(16deg); }
+  50% { transform: rotate(-16deg); }
+}
+
+@keyframes walk-b {
+  0%, 100% { transform: rotate(-16deg); }
+  50% { transform: rotate(16deg); }
+}
+
+@keyframes run-a {
+  0%, 100% { transform: rotate(28deg); }
+  50% { transform: rotate(-28deg); }
+}
+
+@keyframes run-b {
+  0%, 100% { transform: rotate(-28deg); }
+  50% { transform: rotate(28deg); }
+}
+
+@keyframes land-squash {
+  0% { transform: scaleY(0.86) scaleX(1.08); }
+  100% { transform: scaleY(1) scaleX(1); }
+}
+
+@keyframes scarf-drift {
+  0%, 100% { transform: rotate(3deg) scaleX(1); }
+  50% { transform: rotate(-7deg) scaleX(0.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .character *,
+  .scarf {
+    animation: none !important;
+    transition: none !important;
+  }
+}
