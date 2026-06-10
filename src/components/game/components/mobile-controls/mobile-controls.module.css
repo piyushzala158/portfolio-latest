@@ -1,0 +1,50 @@
+.controls {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  z-index: 85;
+  display: none;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.cluster {
+  display: flex;
+  gap: 10px;
+}
+
+.controls button {
+  display: inline-flex;
+  width: 58px;
+  height: 58px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--game-border);
+  border-radius: 8px;
+  background: rgba(3, 7, 18, 0.78);
+  color: var(--game-text);
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.controls button:active {
+  border-color: var(--game-border-strong);
+  background: rgba(34, 211, 238, 0.16);
+}
+
+.jump {
+  width: 68px !important;
+  height: 68px !important;
+  border-radius: 50% !important;
+  background: rgba(14, 116, 144, 0.78) !important;
+}
+
+@media (max-width: 900px) {
+  .controls {
+    display: flex;
+  }
+}
