@@ -6,7 +6,7 @@ import { TimelineItem } from "@/components/ui/timeline-item";
 
 export function Experience() {
   return (
-    <section id="work" className="py-20 lg:py-32 px-6">
+    <section id="work" className="py-16 lg:py-24 px-6">
       <div className="max-w-3xl mx-auto">
         <SectionHeading
           title="Work Experience"

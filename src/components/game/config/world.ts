@@ -44,6 +44,7 @@ export const initialPlayer: Player = {
   grounded: false,
   facing: 1,
   state: "fall",
+  mode: "platformer",
   landedAt: 0,
 };
 

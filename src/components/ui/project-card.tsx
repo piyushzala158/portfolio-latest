@@ -10,12 +10,9 @@ interface ProjectCardProps extends Project {
 }
 
 const gradients = [
-  "from-accent-blue/20 via-accent-violet/10 to-transparent",
-  "from-accent-violet/20 via-accent-cyan/10 to-transparent",
-  "from-accent-cyan/20 via-accent-blue/10 to-transparent",
-  "from-accent-blue/15 via-accent-cyan/15 to-transparent",
-  "from-accent-violet/20 via-accent-blue/10 to-transparent",
-  "from-accent-cyan/15 via-accent-violet/15 to-transparent",
+  "from-text-primary/12 via-text-primary/4 to-transparent",
+  "from-text-primary/8 via-text-primary/6 to-transparent",
+  "from-text-primary/10 via-transparent to-text-primary/4",
 ];
 
 /* Inline GitHub SVG since lucide-react v1.17+ removed brand icons */
@@ -50,27 +47,25 @@ export function ProjectCard({
       className={cn(
         "glass-card group relative flex h-full flex-col overflow-hidden",
         "transition-all duration-500",
-        "hover:-translate-y-1 hover:border-accent-blue/40 hover:shadow-[0_8px_40px_rgba(59,130,246,0.12)]"
+        "hover:-translate-y-1 hover:border-accent-blue/40 hover:shadow-[0_8px_40px_rgba(255,255,255,0.08)]"
       )}
     >
       {/* Gradient header area */}
       <div
         className={cn(
-          "h-32 bg-gradient-to-br sm:h-36",
+          "h-28 border-b border-border-subtle bg-gradient-to-br",
           gradient,
           "transition-opacity duration-500 group-hover:opacity-80"
         )}
       >
-        {/* Decorative dot pattern */}
-        <div className="flex h-full items-center justify-center">
-          <div className="grid grid-cols-3 gap-3 opacity-20">
-            {Array.from({ length: 9 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-2 w-2 rounded-full bg-text-primary/40"
-              />
-            ))}
-          </div>
+        {/* Monogram */}
+        <div className="flex h-full items-center justify-between px-6">
+          <span className="font-heading text-5xl font-bold tracking-tight text-text-primary/80">
+            {title.charAt(0).toUpperCase()}
+          </span>
+          <span className="font-mono text-xs text-text-muted">
+            {String(index + 1).padStart(2, "0")}
+          </span>
         </div>
       </div>
 
@@ -113,7 +108,7 @@ export function ProjectCard({
                   "inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium",
                   "bg-accent-blue/10 text-accent-blue",
                   "transition-all duration-300",
-                  "hover:bg-accent-blue/20 hover:shadow-[0_0_16px_rgba(59,130,246,0.2)]"
+                  "hover:bg-accent-blue/20 hover:shadow-[0_0_16px_rgba(255,255,255,0.12)]"
                 )}
               >
                 <ExternalLink className="h-3.5 w-3.5" />

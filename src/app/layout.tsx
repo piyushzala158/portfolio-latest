@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { GameModeProvider } from "@/components/game-mode/game-mode-context";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { Navigation } from "@/components/layout/navigation";
 
@@ -17,6 +18,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://piyushzala.vercel.app"),
   title: "Piyush Zala — Frontend Software Engineer",
   description:
     "Portfolio of Piyush Zala — Frontend Software Engineer specializing in React, Next.js, and TypeScript. 3+ years of experience building modern web applications.",
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Piyush Zala — Frontend Software Engineer",
     description: "Frontend Software Engineer specializing in React, Next.js, and TypeScript.",
-    url: "https://portfolio-latest-taupe.vercel.app",
+    url: "https://piyushzala.vercel.app",
     siteName: "Piyush Zala Portfolio",
     locale: "en_US",
     type: "website",
@@ -52,11 +54,13 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}
       >
         <ThemeProvider>
-          <AuroraBackground />
-          <Navigation />
-          <main className="relative z-10">
-            {children}
-          </main>
+          <GameModeProvider>
+            <AuroraBackground />
+            <Navigation />
+            <main className="relative z-10 lg:pl-24">
+              {children}
+            </main>
+          </GameModeProvider>
         </ThemeProvider>
       </body>
     </html>

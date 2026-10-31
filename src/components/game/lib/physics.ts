@@ -1,10 +1,13 @@
-import { platforms } from "../config/platforms";
-import { PHYSICS, PLAYER_SIZE, WORLD } from "../config/world";
+import { PHYSICS, PLAYER_SIZE } from "../config/world";
 import type { Camera, ControlsState, Player } from "../types";
+import type { Rect } from "../types";
 
 type StepArgs = {
   player: Player;
   controls: ControlsState;
+  platforms: Rect[];
+  world: { width: number; height: number; minX?: number };
+  pointer: { x: number; y: number } | null;
   dt: number;
   now: number;
   jumpQueuedAt: number;
@@ -22,6 +25,9 @@ type StepResult = {
 export function stepPlayer({
   player,
   controls,
+  platforms,
+  world,
+  pointer,
   dt,
   now,
   jumpQueuedAt,
@@ -31,18 +37,56 @@ export function stepPlayer({
   const previous = { ...player };
   const next: Player = { ...player };
   const accel = next.grounded ? PHYSICS.acceleration : PHYSICS.airAcceleration;
+  let consumedJump = false;
 
-  if (controls.left) {
+  if (next.mode === "grabbed" && pointer) {
+    next.x = pointer.x - PLAYER_SIZE.width / 2;
+    next.y = pointer.y - PLAYER_SIZE.height / 2;
+    next.vx = 0;
+    next.vy = 0;
+    next.grounded = false;
+    next.state = "grabbed";
+
+    return {
+      player: next,
+      safeSpawn,
+      lastGroundedAt,
+      consumedJump,
+    };
+  }
+
+  if (next.mode === "chase" && typeof next.chaseTargetX === "number") {
+    const delta = next.chaseTargetX - (next.x + PLAYER_SIZE.width / 2);
+    const direction = Math.sign(delta);
+
+    if (Math.abs(delta) <= 12) {
+      next.mode = "platformer";
+      next.chaseTargetX = undefined;
+    } else if (direction !== 0) {
+      next.vx += direction * accel * 1.25 * dt;
+      next.facing = direction > 0 ? 1 : -1;
+
+      if (next.grounded && Math.abs(delta) > 96 && Math.abs(next.vx) < 0.8) {
+        next.vy = PHYSICS.jumpImpulse * 0.72;
+        next.grounded = false;
+      }
+    }
+  }
+
+  if (next.mode === "platformer" && controls.left) {
     next.vx -= accel * dt;
     next.facing = -1;
   }
 
-  if (controls.right) {
+  if (next.mode === "platformer" && controls.right) {
     next.vx += accel * dt;
     next.facing = 1;
   }
 
-  if (!controls.left && !controls.right) {
+  if (
+    (next.mode === "platformer" && !controls.left && !controls.right) ||
+    (next.mode === "chase" && typeof next.chaseTargetX !== "number")
+  ) {
     next.vx *= Math.pow(PHYSICS.friction, dt);
   }
 
@@ -50,9 +94,8 @@ export function stepPlayer({
 
   const jumpBuffered = now - jumpQueuedAt <= PHYSICS.jumpBufferMs;
   const canCoyoteJump = next.grounded || now - lastGroundedAt <= PHYSICS.coyoteMs;
-  let consumedJump = false;
 
-  if (jumpBuffered && canCoyoteJump) {
+  if (next.mode === "platformer" && jumpBuffered && canCoyoteJump) {
     next.vy = PHYSICS.jumpImpulse;
     next.grounded = false;
     consumedJump = true;
@@ -62,7 +105,7 @@ export function stepPlayer({
   next.vy = Math.min(next.vy, PHYSICS.maxFallSpeed);
   next.x += next.vx * dt;
   next.y += next.vy * dt;
-  next.x = clamp(next.x, 24, WORLD.width - PLAYER_SIZE.width - 24);
+  next.x = clamp(next.x, world.minX ?? 24, world.width - PLAYER_SIZE.width - 24);
   next.grounded = false;
 
   let nextSafeSpawn = safeSpawn;
@@ -90,7 +133,7 @@ export function stepPlayer({
     }
   }
 
-  if (next.y > WORLD.height + 220) {
+  if (next.y > world.height + 220) {
     next.x = nextSafeSpawn.x;
     next.y = nextSafeSpawn.y;
     next.vx = 0;
@@ -110,10 +153,15 @@ export function stepPlayer({
   };
 }
 
-export function nextCamera(player: Player, camera: Camera, viewport: { width: number; height: number }) {
+export function nextCamera(
+  player: Player,
+  camera: Camera,
+  viewport: { width: number; height: number },
+  world: { width: number; height: number }
+) {
   const target = {
-    x: clamp(player.x - viewport.width * 0.42, 0, Math.max(0, WORLD.width - viewport.width)),
-    y: clamp(player.y - viewport.height * 0.36, 0, Math.max(0, WORLD.height - viewport.height)),
+    x: clamp(player.x - viewport.width * 0.42, 0, Math.max(0, world.width - viewport.width)),
+    y: clamp(player.y - viewport.height * 0.38, 0, Math.max(0, world.height - viewport.height)),
   };
 
   return {
@@ -123,6 +171,14 @@ export function nextCamera(player: Player, camera: Camera, viewport: { width: nu
 }
 
 function getPlayerState(player: Player, now: number) {
+  if (player.mode === "grabbed") {
+    return "grabbed";
+  }
+
+  if (player.mode === "chase" && Math.abs(player.vx) > 0.4) {
+    return "chase";
+  }
+
   if (now - player.landedAt < 130 && player.grounded && Math.abs(player.vx) < 1.5) {
     return "land";
   }

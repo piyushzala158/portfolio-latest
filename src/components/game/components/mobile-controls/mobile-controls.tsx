@@ -4,15 +4,21 @@ import styles from "./mobile-controls.module.css";
 
 export function MobileControls({
   setControl,
+  disabled = false,
 }: {
   setControl: (control: keyof ControlsState, active: boolean) => void;
+  disabled?: boolean;
 }) {
   const bind = (control: keyof ControlsState) => ({
-    onPointerDown: () => setControl(control, true),
+    onPointerDown: () => !disabled && setControl(control, true),
     onPointerUp: () => setControl(control, false),
     onPointerLeave: () => setControl(control, false),
     onPointerCancel: () => setControl(control, false),
     onClick: () => {
+      if (disabled) {
+        return;
+      }
+
       setControl(control, true);
       window.setTimeout(() => setControl(control, false), 140);
     },
@@ -21,14 +27,14 @@ export function MobileControls({
   return (
     <div className={styles.controls} aria-label="Mobile game controls">
       <div className={styles.cluster}>
-        <button type="button" aria-label="Move left" {...bind("left")}>
+        <button type="button" aria-label="Move left" disabled={disabled} {...bind("left")}>
           <ArrowLeft className="h-5 w-5" aria-hidden="true" />
         </button>
-        <button type="button" aria-label="Move right" {...bind("right")}>
+        <button type="button" aria-label="Move right" disabled={disabled} {...bind("right")}>
           <ArrowRight className="h-5 w-5" aria-hidden="true" />
         </button>
       </div>
-      <button type="button" className={styles.jump} aria-label="Jump" {...bind("jump")}>
+      <button type="button" className={styles.jump} aria-label="Jump" disabled={disabled} {...bind("jump")}>
         <ChevronUp className="h-6 w-6" aria-hidden="true" />
       </button>
     </div>

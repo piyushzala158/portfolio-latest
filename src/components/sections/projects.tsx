@@ -6,7 +6,7 @@ import { ProjectCard } from "@/components/ui/project-card";
 
 export function Projects() {
   return (
-    <section id="projects" className="py-20 lg:py-32 px-6">
+    <section id="projects" className="py-16 lg:py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <SectionHeading
           title="Featured Projects"

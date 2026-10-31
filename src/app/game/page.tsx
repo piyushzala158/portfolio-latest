@@ -1,12 +1,5 @@
-import type { Metadata } from "next";
-import { PortfolioGame } from "@/components/game/portfolio-game";
-
-export const metadata: Metadata = {
-  title: "Game Mode - Piyush Zala Portfolio",
-  description:
-    "Explore Piyush Zala's portfolio as a playable vertical platform experience.",
-};
+import { redirect } from "next/navigation";
 
 export default function GamePage() {
-  return <PortfolioGame />;
+  redirect("/?game=1");
 }

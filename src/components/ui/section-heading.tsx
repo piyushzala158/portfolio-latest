@@ -20,7 +20,7 @@ export function SectionHeading({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={cn("mb-12 text-center md:mb-16", className)}
+      className={cn("mb-10 text-center md:mb-14", className)}
     >
       <h2 className="gradient-text font-heading text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
         {title}

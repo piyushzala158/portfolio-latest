@@ -69,7 +69,7 @@ export function SocialLink({ name, url, icon, className }: SocialLinkProps) {
         "glass-card group inline-flex items-center gap-3 px-5 py-3",
         "text-sm font-medium text-text-secondary",
         "transition-all duration-300",
-        "hover:border-accent-blue/40 hover:text-accent-blue hover:shadow-[0_0_20px_rgba(59,130,246,0.12)]",
+        "hover:border-accent-blue/40 hover:text-accent-blue hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]",
         className
       )}
     >

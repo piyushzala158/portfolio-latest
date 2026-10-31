@@ -1,10 +1,9 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
-import { platforms } from "../config/platforms";
-import { collectibles, zones } from "../config/zones";
-import { initialProgress, PLAYER_SIZE, PROGRESS_KEY } from "../config/world";
-import type { GameProgress, Player } from "../types";
+import { zones } from "../config/zones";
+import { initialProgress, PROGRESS_KEY } from "../config/world";
+import type { GameProgress } from "../types";
 
 export function useGameProgress() {
   const progressRef = useRef<GameProgress>(initialProgress);
@@ -21,7 +20,7 @@ export function useGameProgress() {
     }
   }, []);
 
-  const restoreProgress = useCallback(() => {
+  const restoreProgress = useCallback((): GameProgress | null => {
     try {
       const saved = window.localStorage.getItem(PROGRESS_KEY);
       if (!saved) {
@@ -35,36 +34,19 @@ export function useGameProgress() {
 
       const restoredZone =
         zones.find((zone) => zone.id === parsed.currentSection) ?? zones[0];
-      const platform =
-        platforms.find((item) => item.y >= restoredZone.y + 80) ?? platforms[0];
       const restoredProgress: GameProgress = {
         currentSection: restoredZone.id,
         discovered: parsed.discovered.filter((id) =>
           zones.some((zone) => zone.id === id)
         ),
-        collected: parsed.collected.filter((id) =>
-          collectibles.some((collectible) => collectible.id === id)
-        ),
+        collected: [],
         completion: parsed.completion || 0,
-      };
-      const restoredPlayer: Player = {
-        x: platform.x + 42,
-        y: platform.y - PLAYER_SIZE.height,
-        vx: 0,
-        vy: 0,
-        grounded: true,
-        facing: 1,
-        state: "idle",
-        landedAt: performance.now(),
       };
 
       progressRef.current = restoredProgress;
       setProgressState(restoredProgress);
 
-      return {
-        progress: restoredProgress,
-        player: restoredPlayer,
-      };
+      return restoredProgress;
     } catch {
       progressRef.current = initialProgress;
       setProgressState(initialProgress);

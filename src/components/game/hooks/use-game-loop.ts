@@ -2,24 +2,29 @@
 
 import type { MutableRefObject } from "react";
 import { useEffect, useRef } from "react";
-import { buildProgress, getActiveObject, getCurrentZone, getNearbyCollectible } from "../lib/interactions";
+import { buildProgress, getCurrentZone } from "../lib/interactions";
 import { nextCamera, stepPlayer } from "../lib/physics";
-import type { Camera, ControlsState, GameProgress, Player } from "../types";
+import { PLAYER_SIZE } from "../config/world";
+import type { Camera, ControlsState, GameProgress, Player, Rect, SectionBand } from "../types";
 
 type UseGameLoopArgs = {
   paused: boolean;
   playerRef: MutableRefObject<Player>;
   cameraRef: MutableRefObject<Camera>;
   viewportRef: MutableRefObject<{ width: number; height: number }>;
+  platformsRef: MutableRefObject<Rect[]>;
+  zoneBandsRef: MutableRefObject<SectionBand[]>;
+  worldRef: MutableRefObject<{ width: number; height: number; minX?: number }>;
+  pointerRef: MutableRefObject<{ x: number; y: number } | null>;
   controlsRef: MutableRefObject<ControlsState>;
   jumpQueuedAtRef: MutableRefObject<number>;
   progressRef: MutableRefObject<GameProgress>;
   safeSpawnRef: MutableRefObject<{ x: number; y: number }>;
   onPlayer: (player: Player) => void;
   onCamera: (camera: Camera) => void;
-  onActiveObject: (id: string) => void;
   onProgress: (progress: GameProgress) => void;
   onJumpConsumed: () => void;
+  reducedMotion: boolean;
 };
 
 export function useGameLoop({
@@ -27,19 +32,28 @@ export function useGameLoop({
   playerRef,
   cameraRef,
   viewportRef,
+  platformsRef,
+  zoneBandsRef,
+  worldRef,
+  pointerRef,
   controlsRef,
   jumpQueuedAtRef,
   progressRef,
   safeSpawnRef,
   onPlayer,
   onCamera,
-  onActiveObject,
   onProgress,
   onJumpConsumed,
+  reducedMotion,
 }: UseGameLoopArgs) {
   const frameRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
   const lastGroundedAtRef = useRef(0);
+  const followUntilRef = useRef(0);
+
+  useEffect(() => {
+    followUntilRef.current = performance.now() + 1200;
+  }, []);
 
   useEffect(() => {
     const tick = (time: number) => {
@@ -51,6 +65,9 @@ export function useGameLoop({
         const stepped = stepPlayer({
           player: playerRef.current,
           controls: controlsRef.current,
+          platforms: platformsRef.current,
+          world: worldRef.current,
+          pointer: pointerRef.current,
           dt,
           now: time,
           jumpQueuedAt: jumpQueuedAtRef.current,
@@ -66,18 +83,41 @@ export function useGameLoop({
           onJumpConsumed();
         }
 
-        const camera = nextCamera(stepped.player, cameraRef.current, viewportRef.current);
+        const camera = nextCamera(
+          stepped.player,
+          cameraRef.current,
+          viewportRef.current,
+          worldRef.current
+        );
         cameraRef.current = camera;
 
-        const currentZone = getCurrentZone(stepped.player.y);
-        const collectible = getNearbyCollectible(stepped.player, progressRef.current.collected);
-        const collected = collectible
-          ? [...progressRef.current.collected, collectible.id]
-          : progressRef.current.collected;
-        const progress = buildProgress(progressRef.current, currentZone.id, collected);
+        // Follow the character while it moves (and briefly on start) so the
+        // visitor can still scroll freely while standing still.
+        const moving =
+          !stepped.player.grounded ||
+          Math.abs(stepped.player.vx) > 0.15 ||
+          stepped.player.mode !== "platformer";
+
+        if (moving || time < followUntilRef.current) {
+          const viewportHeight = viewportRef.current.height;
+          const targetScroll = Math.min(
+            Math.max(0, worldRef.current.height - viewportHeight),
+            Math.max(0, stepped.player.y + PLAYER_SIZE.height - viewportHeight * 0.78)
+          );
+          const delta = targetScroll - window.scrollY;
+
+          if (Math.abs(delta) > 1) {
+            window.scrollTo({
+              top: reducedMotion ? targetScroll : window.scrollY + delta * Math.min(1, 0.14 * dt),
+              behavior: "instant",
+            });
+          }
+        }
+
+        const currentZone = getCurrentZone(stepped.player.y, zoneBandsRef.current);
+        const progress = buildProgress(progressRef.current, currentZone.id);
 
         onProgress(progress);
-        onActiveObject(getActiveObject(stepped.player));
         onPlayer(stepped.player);
         onCamera(camera);
       }
@@ -96,15 +136,19 @@ export function useGameLoop({
     cameraRef,
     controlsRef,
     jumpQueuedAtRef,
-    onActiveObject,
     onCamera,
     onJumpConsumed,
     onPlayer,
     onProgress,
+    platformsRef,
+    pointerRef,
     paused,
     playerRef,
     progressRef,
+    reducedMotion,
     safeSpawnRef,
     viewportRef,
+    worldRef,
+    zoneBandsRef,
   ]);
 }

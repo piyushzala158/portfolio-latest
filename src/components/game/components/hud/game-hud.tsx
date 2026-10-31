@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Home, MapPin, Pause, RotateCcw } from "lucide-react";
+import { Home, MapPin, Pause, Play, RotateCcw } from "lucide-react";
 import type { GameProgress, Zone } from "../../types";
 import styles from "./game-hud.module.css";
 
@@ -8,11 +7,15 @@ export function GameHud({
   progress,
   onPause,
   onReset,
+  onExit,
+  paused,
 }: {
   currentZone: Zone;
   progress: GameProgress;
   onPause: () => void;
   onReset: () => void;
+  onExit: () => void;
+  paused: boolean;
 }) {
   return (
     <div className={styles.hud} aria-label="Game progress">
@@ -29,18 +32,21 @@ export function GameHud({
       <div className={styles.meta}>
         <span>{progress.completion}%</span>
         <span>{progress.discovered.length}/7 zones</span>
-        <span>{progress.collected.length}/3 trophies</span>
       </div>
       <div className={styles.actions}>
         <button type="button" onClick={onReset} aria-label="Reset game progress">
           <RotateCcw className="h-4 w-4" aria-hidden="true" />
         </button>
-        <button type="button" onClick={onPause} aria-label="Pause game">
-          <Pause className="h-4 w-4" aria-hidden="true" />
+        <button type="button" onClick={onPause} aria-label={paused ? "Resume game" : "Pause game"}>
+          {paused ? (
+            <Play className="h-4 w-4" aria-hidden="true" />
+          ) : (
+            <Pause className="h-4 w-4" aria-hidden="true" />
+          )}
         </button>
-        <Link href="/" aria-label="Exit game mode">
+        <button type="button" onClick={onExit} aria-label="Exit game mode">
           <Home className="h-4 w-4" aria-hidden="true" />
-        </Link>
+        </button>
       </div>
     </div>
   );

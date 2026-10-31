@@ -41,7 +41,7 @@ export function Skills() {
   }));
 
   return (
-    <section id="skills" className="py-20 lg:py-32 px-6">
+    <section id="skills" className="py-16 lg:py-24 px-6">
       <div className="max-w-4xl mx-auto">
         <SectionHeading
           title="Skills & Technologies"
@@ -57,10 +57,10 @@ export function Skills() {
         >
           {skillsByCategory.map(({ category, skills }) => (
             <motion.div key={category} variants={groupVariants}>
-              <h3 className="text-sm font-medium text-accent-blue uppercase tracking-wider mb-3">
+              <h3 className="text-xs font-semibold text-text-muted uppercase tracking-[0.18em] mb-3 text-center">
                 {category}
               </h3>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap justify-center gap-2.5">
                 {skills.map((skill, i) => (
                   <SkillBadge key={skill.name} name={skill.name} index={i} />
                 ))}

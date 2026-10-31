@@ -34,7 +34,7 @@ export function TimelineItem({
         <div
           className={cn(
             "relative z-10 h-3.5 w-3.5 shrink-0 rounded-full bg-accent-blue",
-            "shadow-[0_0_12px_rgba(59,130,246,0.5)]",
+            "shadow-[0_0_12px_rgba(255,255,255,0.24)]",
             "ring-4 ring-bg-primary"
           )}
         />

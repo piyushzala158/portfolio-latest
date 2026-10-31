@@ -40,7 +40,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       className={cn(
         "glass-card relative inline-flex h-10 w-10 items-center justify-center rounded-full",
         "text-text-secondary transition-all duration-300",
-        "hover:border-accent-blue/40 hover:text-accent-blue hover:shadow-[0_0_16px_rgba(59,130,246,0.15)]",
+        "hover:border-accent-blue/40 hover:text-accent-blue hover:shadow-[0_0_16px_rgba(255,255,255,0.12)]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue/50",
         className
       )}

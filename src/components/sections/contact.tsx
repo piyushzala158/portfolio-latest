@@ -29,7 +29,7 @@ const itemVariants = {
 
 export function Contact() {
   return (
-    <section id="contact" className="py-20 lg:py-32 px-6">
+    <section id="contact" className="py-16 lg:py-24 px-6">
       <div className="max-w-2xl mx-auto">
         <SectionHeading title="Contact" />
 
@@ -39,10 +39,10 @@ export function Contact() {
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
         >
-          <GlassCard className="p-12 text-center" hover={false}>
+          <GlassCard className="px-6 py-10 sm:p-12 text-center" hover={false}>
             <motion.h3
               variants={itemVariants}
-              className="gradient-text text-4xl font-heading font-bold mb-4"
+              className="gradient-text text-3xl sm:text-4xl font-heading font-bold mb-4"
             >
               Let&apos;s Work Together
             </motion.h3>
@@ -57,7 +57,7 @@ export function Contact() {
             <motion.div variants={itemVariants} className="mb-8">
               <motion.a
                 href={`mailto:${DATA.email}`}
-                className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-medium text-white bg-gradient-to-r from-accent-blue to-accent-violet transition-transform"
+                className="inline-flex max-w-full items-center gap-2 rounded-full px-6 py-4 sm:px-8 font-medium break-all text-accent-foreground bg-accent-blue shadow-[0_8px_30px_rgba(0,0,0,0.25)] transition-transform"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -68,7 +68,7 @@ export function Contact() {
 
             <motion.div
               variants={itemVariants}
-              className="flex justify-center gap-4"
+              className="flex flex-wrap justify-center gap-3"
             >
               {DATA.social.map((social) => (
                 <SocialLink

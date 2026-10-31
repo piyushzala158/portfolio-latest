@@ -1,5 +1,5 @@
 .hud {
-  position: absolute;
+  position: fixed;
   left: 16px;
   right: 16px;
   top: 16px;
@@ -10,13 +10,14 @@
   gap: 12px;
   max-width: 1120px;
   margin-inline: auto;
-  border: 1px solid var(--game-border);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
-  background: rgba(3, 7, 18, 0.76);
+  background: rgba(10, 10, 10, 0.76);
   padding: 10px;
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+  pointer-events: auto;
 }
 
 .location {
@@ -26,7 +27,7 @@
 }
 
 .locationIcon {
-  color: var(--game-cyan);
+  color: var(--game-text);
 }
 
 .eyebrow,
@@ -55,14 +56,14 @@
   min-width: 120px;
   overflow: hidden;
   border-radius: 999px;
-  background: rgba(51, 65, 85, 0.62);
+  background: rgba(64, 64, 64, 0.62);
 }
 
 .progressTrack span {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--game-cyan), var(--game-green));
+  background: linear-gradient(90deg, #f5f5f5, #737373);
   transition: width 180ms ease;
 }
 
@@ -87,9 +88,9 @@
   height: 34px;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--game-border);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(23, 23, 23, 0.75);
   color: var(--game-text);
   cursor: pointer;
   transition: background 150ms ease, border-color 150ms ease;
@@ -97,8 +98,8 @@
 
 .actions button:hover,
 .actions a:hover {
-  border-color: var(--game-border-strong);
-  background: rgba(34, 211, 238, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 @media (max-width: 900px) {
@@ -110,6 +111,11 @@
   .progressTrack,
   .meta {
     grid-column: 1 / -1;
+  }
+
+  .actions {
+    grid-column: 2;
+    grid-row: 1;
   }
 
   .meta {

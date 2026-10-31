@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { ChevronDown, Gamepad2 } from "lucide-react";
 import { DATA } from "@/data/portfolio";
+import { useGameMode } from "@/components/game-mode/game-mode-context";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -33,13 +33,15 @@ const floatingEmojis = [
 ];
 
 export function Hero() {
+  const { isGameMode, toggleGameMode } = useGameMode();
+
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center px-6 lg:px-12"
+      className="relative min-h-screen flex items-center justify-center px-6 pt-16 pb-28 lg:px-12 lg:py-0"
     >
       <motion.div
-        className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+        className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -75,7 +77,7 @@ export function Hero() {
           >
             <motion.a
               href="#contact"
-              className="inline-flex items-center justify-center rounded-full px-8 py-4 font-medium text-white bg-gradient-to-r from-accent-blue to-accent-violet transition-transform"
+              className="inline-flex items-center justify-center rounded-full px-8 py-4 font-medium text-accent-foreground bg-accent-blue shadow-[0_8px_30px_rgba(0,0,0,0.25)] transition-transform"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -90,13 +92,15 @@ export function Hero() {
               View Projects
             </motion.a>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                href="/game"
+              <button
+                type="button"
+                onClick={toggleGameMode}
                 className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 font-medium text-text-primary bg-bg-card border border-border-subtle transition-colors hover:border-border-accent"
+                aria-pressed={isGameMode}
               >
                 <Gamepad2 className="h-5 w-5" aria-hidden="true" />
-                Game Mode
-              </Link>
+                {isGameMode ? "Exit Game" : "Game Mode"}
+              </button>
             </motion.div>
           </motion.div>
         </div>
@@ -106,7 +110,7 @@ export function Hero() {
           variants={itemVariants}
           className="flex items-center justify-center order-1 lg:order-2"
         >
-          <div className="relative w-72 h-72 lg:w-96 lg:h-96">
+          <div className="relative w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96">
             {/* Gradient ring */}
             <div className="absolute inset-0 gradient-border rounded-full">
               <div className="absolute inset-[3px] rounded-full overflow-hidden bg-bg-primary">
@@ -114,7 +118,8 @@ export function Hero() {
                   src={DATA.avatarUrl}
                   alt={DATA.name}
                   fill
-                  className="object-cover rounded-full"
+                  sizes="(min-width: 1024px) 384px, (min-width: 640px) 288px, 224px"
+                  className="object-cover scale-[1.4]"
                   priority
                 />
               </div>

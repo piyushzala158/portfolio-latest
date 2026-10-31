@@ -1,5 +1,5 @@
 .controls {
-  position: absolute;
+  position: fixed;
   left: 18px;
   right: 18px;
   bottom: 18px;
@@ -20,9 +20,9 @@
   height: 58px;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--game-border);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
-  background: rgba(3, 7, 18, 0.78);
+  background: rgba(10, 10, 10, 0.78);
   color: var(--game-text);
   cursor: pointer;
   pointer-events: auto;
@@ -32,19 +32,20 @@
 }
 
 .controls button:active {
-  border-color: var(--game-border-strong);
-  background: rgba(34, 211, 238, 0.16);
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .jump {
   width: 68px !important;
   height: 68px !important;
   border-radius: 50% !important;
-  background: rgba(14, 116, 144, 0.78) !important;
+  background: rgba(64, 64, 64, 0.78) !important;
 }
 
 @media (max-width: 900px) {
   .controls {
+    bottom: 96px;
     display: flex;
   }
 }

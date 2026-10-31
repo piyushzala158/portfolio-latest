@@ -23,7 +23,7 @@
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  border: 1px solid rgba(34, 211, 238, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   opacity: 0;
   pointer-events: none;
   transition: opacity 180ms ease;
@@ -37,7 +37,7 @@
   border-color: var(--game-border-strong);
   box-shadow:
     0 24px 88px rgba(0, 0, 0, 0.4),
-    0 0 42px rgba(34, 211, 238, 0.11);
+    0 0 42px rgba(255, 255, 255, 0.08);
   transform: translateY(-8px);
 }
 
@@ -106,7 +106,7 @@
 
 .prompt {
   margin-top: 12px !important;
-  color: rgba(125, 211, 252, 0.72) !important;
+  color: rgba(245, 245, 245, 0.72) !important;
   font-size: 0.74rem !important;
   font-weight: 800;
 }
@@ -184,7 +184,7 @@
 .links a:hover,
 .contactGrid a:hover {
   border-color: var(--game-border-strong);
-  background: rgba(34, 211, 238, 0.12);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .timeline {

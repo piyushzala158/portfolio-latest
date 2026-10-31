@@ -19,6 +19,14 @@ export type Rect = {
   zoneId: ZoneId;
 };
 
+export type SectionBand = {
+  id: string;
+  zoneId: ZoneId;
+  label: string;
+  top: number;
+  height: number;
+};
+
 export type Zone = {
   id: ZoneId;
   label: string;
@@ -64,7 +72,9 @@ export type DecorativeElement = {
   size: number;
 };
 
-export type PlayerState = "idle" | "walk" | "run" | "jump" | "fall" | "land";
+export type PlayerState = "idle" | "walk" | "run" | "jump" | "fall" | "land" | "chase" | "grabbed";
+
+export type InteractionMode = "platformer" | "chase" | "grabbed";
 
 export type Player = {
   x: number;
@@ -74,6 +84,8 @@ export type Player = {
   grounded: boolean;
   facing: 1 | -1;
   state: PlayerState;
+  mode: InteractionMode;
+  chaseTargetX?: number;
   landedAt: number;
 };
 
