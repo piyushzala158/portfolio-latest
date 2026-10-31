@@ -27,6 +27,7 @@ export function Character({
   const rightArmRef = useRef<HTMLSpanElement>(null);
   const leftLegRef = useRef<HTMLSpanElement>(null);
   const rightLegRef = useRef<HTMLSpanElement>(null);
+  const antennaRef = useRef<HTMLSpanElement>(null);
 
   const refs = useMemo(
     () => ({
@@ -38,6 +39,7 @@ export function Character({
       rightArm: rightArmRef,
       leftLeg: leftLegRef,
       rightLeg: rightLegRef,
+      antenna: antennaRef,
     }),
     []
   );
@@ -57,32 +59,74 @@ export function Character({
       }}
       aria-hidden="true"
       data-game-character="true"
+      data-state={player.state}
       {...handlers}
     >
       <span className={styles.shadow} />
-      <span className={styles.backpack} />
-      <span ref={headRef} className={styles.head}>
-        <span className={styles.face} />
-        <span className={`${styles.eye} ${styles.eyeLeft}`}>
-          <span
-            className={styles.pupil}
-            style={{ transform: `translate(${eyeOffset.x}px, ${eyeOffset.y}px)` }}
-          />
-        </span>
-        <span className={`${styles.eye} ${styles.eyeRight}`}>
-          <span
-            className={styles.pupil}
-            style={{ transform: `translate(${eyeOffset.x}px, ${eyeOffset.y}px)` }}
-          />
-        </span>
-        <span className={styles.smile} />
+
+      {/* Backpack & Thruster */}
+      <span className={styles.backpack}>
+        <span className={styles.batteryGauge} />
+        <span className={styles.thruster} />
       </span>
+
+      {/* Head Assembly */}
+      <span ref={headRef} className={styles.head}>
+        {/* Antenna */}
+        <span ref={antennaRef} className={styles.antenna}>
+          <span className={styles.antennaStem} />
+          <span className={styles.antennaBulb} />
+        </span>
+
+        {/* Ear Headphones */}
+        <span className={`${styles.ear} ${styles.earLeft}`} />
+        <span className={`${styles.ear} ${styles.earRight}`} />
+
+        {/* OLED Face Visor Screen */}
+        <span className={styles.face}>
+          <span className={styles.faceSheen} />
+          <span className={`${styles.eye} ${styles.eyeLeft}`}>
+            <span
+              className={styles.pupil}
+              style={{ transform: `translate(${eyeOffset.x}px, ${eyeOffset.y}px)` }}
+            />
+          </span>
+          <span className={`${styles.eye} ${styles.eyeRight}`}>
+            <span
+              className={styles.pupil}
+              style={{ transform: `translate(${eyeOffset.x}px, ${eyeOffset.y}px)` }}
+            />
+          </span>
+          <span className={`${styles.blush} ${styles.blushLeft}`} />
+          <span className={`${styles.blush} ${styles.blushRight}`} />
+          <span className={styles.smile} />
+        </span>
+      </span>
+
+      {/* Cyber Scarf */}
       <span ref={scarfRef} className={styles.scarf} />
-      <span ref={bodyRef} className={styles.body} />
-      <span ref={leftArmRef} className={`${styles.arm} ${styles.leftArm}`} />
-      <span ref={rightArmRef} className={`${styles.arm} ${styles.rightArm}`} />
-      <span ref={leftLegRef} className={`${styles.leg} ${styles.leftLeg}`} />
-      <span ref={rightLegRef} className={`${styles.leg} ${styles.rightLeg}`} />
+
+      {/* Torso with glowing heart core */}
+      <span ref={bodyRef} className={styles.body}>
+        <span className={styles.chestCore} />
+        <span className={styles.torsoLine} />
+      </span>
+
+      {/* Arms & Hands */}
+      <span ref={leftArmRef} className={`${styles.arm} ${styles.leftArm}`}>
+        <span className={styles.hand} />
+      </span>
+      <span ref={rightArmRef} className={`${styles.arm} ${styles.rightArm}`}>
+        <span className={styles.hand} />
+      </span>
+
+      {/* Legs & Stomp Boots */}
+      <span ref={leftLegRef} className={`${styles.leg} ${styles.leftLeg}`}>
+        <span className={styles.bootGlow} />
+      </span>
+      <span ref={rightLegRef} className={`${styles.leg} ${styles.rightLeg}`}>
+        <span className={styles.bootGlow} />
+      </span>
     </div>
   );
 }

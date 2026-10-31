@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -17,13 +17,22 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["500", "600", "700"],
 });
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f5f5" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://piyushzala.vercel.app"),
   title: "Piyush Zala — Frontend Software Engineer",
   description:
     "Portfolio of Piyush Zala — Frontend Software Engineer specializing in React, Next.js, and TypeScript. 3+ years of experience building modern web applications.",
   keywords: ["Piyush Zala", "Frontend Engineer", "React", "Next.js", "TypeScript", "Portfolio"],
-  authors: [{ name: "Piyush Zala" }],
+  authors: [{ name: "Piyush Zala", url: "https://piyushzala.vercel.app" }],
+  creator: "Piyush Zala",
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Piyush Zala — Frontend Software Engineer",
     description: "Frontend Software Engineer specializing in React, Next.js, and TypeScript.",
@@ -34,6 +43,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    creator: "@zala_piyush_15",
     title: "Piyush Zala — Frontend Software Engineer",
     description: "Frontend Software Engineer specializing in React, Next.js, and TypeScript.",
   },

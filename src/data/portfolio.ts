@@ -5,7 +5,7 @@ export const DATA: PortfolioData = {
   firstName: "Piyush",
   lastName: "Zala",
   initials: "PZ",
-  url: "https://portfolio-latest-taupe.vercel.app",
+  url: "https://piyushzala.vercel.app",
   location: "Ahmedabad, Gujarat, India",
   email: "dev.piyushzala@gmail.com",
   description: "Frontend Software Engineer — React · Next.js · TypeScript",
